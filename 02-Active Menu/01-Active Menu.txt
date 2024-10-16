@@ -1,0 +1,37 @@
+## Step 01 :
+<nav>
+    <ul>
+        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
+        <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="/about">About</a></li>
+        <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+## Step 02 :
+<nav>
+    <ul>
+        <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+        <li class="{{ request()->routeIs('about') ? 'active' : '' }}"><a href="{{ route('about') }}">About</a></li>
+        <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
+    </ul>
+</nav>
+
+
+## Step 03 : 
+<!-- resources/views/includes/menu.blade.php -->
+<nav>
+    <ul>
+        <li class="@if(Request::is('/')) active @endif"><a href="/">Home</a></li>
+        <li class="@if(Request::is('about')) active @endif"><a href="/about">About</a></li>
+        <li class="@if(Request::is('contact')) active @endif"><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+## Step 04 : 
+{{ Route::currentRouteName() == 'admin.list' ? 'active' : '' }}
+
+
+
+

@@ -1,0 +1,9 @@
+# Process 01 : Success Message in Blade File
+------------------------------------------------------------------
+@if( session('success') )
+  <p class="alert alert-success">{{session('success') }}</p>
+@endif
+
+# Process 01 : Success Message in Controller 
+--------------------------------------------------------------------
+return redirect()->route('student.list')->with('success','Student Added Successfully!');

@@ -1,0 +1,108 @@
+Step 1: Set Up Laravel Project
+
+Step 2: Create Admin Model and Migration
+php artisan make:model Admin -m
+
+Step 3: Create Routes
+use App\Http\Controllers\Auth\AdminLoginController;
+
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+
+
+Step 4: Create AdminLoginController
+php artisan make:controller Auth/AdminLoginController
+
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Auth;
+
+class AdminLoginController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('guest:admin')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.admin-login');
+    }
+
+    public function login(Request $request)
+    {
+        // Validate the form data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        // Attempt to log the user in
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // If successful, then redirect to their intended location
+            return redirect()->intended('/admin/dashboard');
+        }
+
+        // If unsuccessful, then redirect back to the login with the form data
+        return redirect()->back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect('/');
+    }
+}
+
+
+
+
+Step 5: Create Admin Model and Configure Auth Guard
+1. Admin Model:
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+use Illuminate\Notifications\Notifiable
+protected $guard = 'admin';
+
+2. Configure Auth Guard:(config/auth.php)
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+    ],
+],
+
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
+],
+
+
+
+Step 6: Create Login View
+( resources/views/auth/admin-login.blade.php )
+
+
+
+
+
+
+
+

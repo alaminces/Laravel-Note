@@ -1,0 +1,16 @@
+create backup controller
+install laravel backup
+config mail (mail trap)
+
+
+
+
+# Note :
+# resource route, to get specific method
+Route::resource('/backup', BackupController)->only('index','create','store','delete');
+
+# to check backup list
+php artisan backup:list
+
+# to run backup
+php artisan backup:run

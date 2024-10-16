@@ -1,0 +1,13 @@
+# Query String
+
+// http://127.0.0.1:8000/product?name=mobile&price=12k
+
+Route::get('/product', [DemoController::class,'product']);
+
+public function product(Request $request) {
+        return $request->query();
+        return $request->query('name');
+        return $request->query('price');
+        return $request->input('name');
+        return $request->price;
+}

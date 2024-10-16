@@ -1,0 +1,31 @@
+##################
+STEP 01
+##################
+
+1. install jwt (Json Web Token) : composer require firebase/php-jwt
+2. search on google by writing `jwt php`
+3. jwt install link : https://github.com/firebase/php-jwt
+
+4. create a new property JWT_TOKEN in .env
+JWT_TOKEN=ADKEI-2082a3
+
+5. create new directory in app dirctory, named `Helper`
+6. create new file in Helper directory named `JWTToken.php`. It will be class  
+7. create two methods named create token and verify token 
+
+/************************** Create Token Method *********
+public static function createToken($userEmail):string {
+     $key = env('JWT_TOKEN');
+     $payload = [
+	'iss' => 'laravel-token',
+	'iat' => time(),
+	'exp' => time()+60*60,
+	'userEmail' => $userEmail,
+     ];
+     return JWT::encode($payload,$key,'HS256');
+}
+/******************************************************
+
+/************************** Verify Token Method *********
+
+/******************************************************

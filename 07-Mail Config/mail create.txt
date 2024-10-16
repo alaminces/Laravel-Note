@@ -1,0 +1,1 @@
+php artisan make:mail TestMail --markdown=emails.mail

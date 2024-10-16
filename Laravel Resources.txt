@@ -1,0 +1,53 @@
+https://www.youtube.com/playlist?list=PLz_YkiqIHesuxBsGgvWy9YEa2qOBUW07R
+
+===============
+## Project Idea
+===============
+1. Todo List app : yes
+2. Blog System : yes
+3. Contact Management System : yes
+4. Simple E-commerce Store : yes
+5. Weather App : no
+6. Recipe Sharing Platform : no 
+7. Bookstore Inventory
+8. Event Management System
+9. Task Tracker
+10. Quize app 
+11. URL Shortener
+12. Personal Finance Tracker : no
+13. Chat Application
+14. Social Media Dashboard
+15. Job Board
+16. Restaurant Reservation System
+17. Note-Taking App
+18.Content Management System (CMS)
+19. Music Library
+20. Project Management Tool : no
+21.  Polling App
+22. Auction Platform
+23. Portfolio Website Builder
+24. Travel Planner
+25. Feedback Collection System : no
+
+
+Laravel Restful Api Resource
+==========================
+w3 coders :  https://www.youtube.com/@W3Coders/playlists
+==============================
+https://www.youtube.com/playlist?list=PLOUudhWYmRUPV7JTSeK9g__8j1YSGSAIn
+==================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

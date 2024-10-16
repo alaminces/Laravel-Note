@@ -1,0 +1,4 @@
+# Introduction about pivot table :
+Table 1 : classes
+Table 2 : subjects
+Table 3 : class_subjects

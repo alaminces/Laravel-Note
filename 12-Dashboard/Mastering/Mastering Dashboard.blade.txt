@@ -1,0 +1,6 @@
+01 : Create new 3 directory in views
+     i) pages -> home,about,contact.blade.php
+     ii) layouts -> app.blade.php
+     iii) components -> header,footer,navbar.blade.php
+
+02 : 

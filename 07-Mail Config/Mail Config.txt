@@ -1,0 +1,39 @@
+/************************** Mail Configaration *********
+1. create mail : php artisan make:mail OTPMail
+2. create blade file named OTPMail.blade.php (It will be template which is used to send email)
+3. config in OTPMail class 
+----------------------------------------
+	public $otp;  // created
+	public function __construct($otp)
+	{
+		$this->otp = $otp;  // created
+	}
+	
+	return new Content(
+		view: 'mail.OTPMail',      // changed 
+	);
+----------------------------------------
+3. config mail smtp
+
+MAIL_MAILER= smtp
+MAIL_HOST= mail.teamrabbil.com
+MAIL_PORT= 25
+MAIL_USERNAME= info@teamrabbil.com
+MAIL_PASSWORD= ~sR4[bhaC[Qs
+MAIL_ENCRYPTION= tls
+MAIL_FROM_ADDRESS= "info@teamrabbil.com"
+MAIL_FROM_NAME= "Pos Test Application for Testing"
+
+/******************************************************
+
+/************ Send OTP Code to Email *********************
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OTPMail;
+
+function sendOTPCode() {
+	$email = "alaminces6@gmail.com";
+	$otp = rand(1000,9999);
+	Mail::to($email)->send(new OTPMail($otp));
+	return "OTP code has been sent. plz check your email";
+}
+/******************************************************

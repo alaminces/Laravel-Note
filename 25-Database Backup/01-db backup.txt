@@ -1,0 +1,8 @@
+search : laravel backup
+go to : installation and setup section
+install : composer require spatie/laravel-backup
+install : php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider"
+
+create resource controller
+
+config env (mailtrap) setup completed

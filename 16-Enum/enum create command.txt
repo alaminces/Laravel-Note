@@ -1,0 +1,61 @@
+# Create Enum file :
+php artisan make:enum GenderEnum
+php artisan make:enum Enums/GenderEnum
+php artisan make:enum Enums/GenderEnum --string
+php artisan make:enum Enums/ReligionEnum -s
+
+# Write enum date in GenderEnum.php
+enum GenderEnum: string{
+     case MALE = 'male';
+     case FEMALE = 'female';
+     case OTHER = 'other';
+}
+
+# Show Enum Data  in Controller
+$genders = GenderEnum::cases();
+@foreach($genders as $item) {
+      {{$item->value}};
+}
+
+
+# Show Enum Data with description in EnumGender.php
+case TEST_ENUM = 'test_num'; // er poriborte nicher ta
+public function description() {
+     self::MALE => 'Male',
+     self::FEMALE => 'Female',
+     self::OTHER => 'Other',
+     self::TEST_ENUM => 'Test Enum',
+}
+
+foreach( $genders as $item ) {
+     echo $item->description();
+}
+
+
+
+## Enum Validation
+php artisan make:request StoreUserRequest
+authorize() will return `true`
+rules() will declare validation 
+such as , 
+
+Illuminate\Validation\Rule;
+'gender'=>['required',Rule::enum(GenderEnum::class)],
+'name'=>'required'
+
+
+## serial number showing 
+{{$loop->iteration}}
+
+
+## Enum Cast ( display data with Capitalize letter in controller)
+protected $casts = [
+     'gender' => GenderEnum::class,
+];
+
+## Selected Old  Enum Value
+@selected(old('gender')==$gender->value)
+
+## Enum in where condition
+$users = UserInfo::where('gender', GenderEnum::FEMALE)->get();
+

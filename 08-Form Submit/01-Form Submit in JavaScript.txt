@@ -1,0 +1,81 @@
+form sumitting in js
+##################
+	STEP 01
+##################
+
+# Registration form submit with js axios
+1. take axios.min.js in your public directory
+2. link below title of your registration page in also another page 
+/*
+    <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+*/
+
+3. write input field without form tag and write id attribute all of input field with onclick function on submit button
+
+/***************************** Registration Form **********************************
+<p id="message"></p>
+<input type="text" name="fname" id="fname" placeholder="First Name" /> <br><br>
+<input type="text" name="lname" id="lname" placeholder="Last Name" /> <br><br>
+<input type="email" name="email" id="email" placeholder="Email Address" /> <br><br>
+<input type="text" name="mobile" id="mobile" placeholder="Mobile Number" /> <br><br>
+<input type="password" name="password" id="password" placeholder="***" /> <br><br>
+<input type="submit" onclick="userRegistrationProcess()" value="Register" />
+/*********************************************************************************
+
+/***************************** Registration With JS **********************************
+<script>
+	async function userRegistrationProcess() {
+		// Value of Input fields
+		let fname = document.getElementById('fname').value;
+		let lname = document.getElementById('lname').value;
+		let email = document.getElementById('email').value;
+		let mobile = document.getElementById('mobile').value;
+		let password = document.getElementById('password').value;
+		
+		// Validation 
+		if ( fname.length === 0 ) {
+			errorMessage('First Name Field is Required');
+		}else if ( lname.length === 0 ) {
+			errorMessage('Last Name Field is Required');
+		}else if( email.length === 0 ) {
+			errorMessage('Email Field is Required');
+		}else if ( mobile.length === 0 ) {
+			errorMessage('Mobile Field is Required');
+		}else if( password.length === 0 ) {
+			errorMessage('Password Field is Required');
+		}else {
+			// Data send to registration post route 
+			let res = await axios.post('/registration',{
+				fname : fname,
+				lname : lname,
+				email : email,
+				mobile : mobile,
+				password : password
+			});
+			
+			// check status
+			if ( res.status === 200 && res.data['status']=='success' ) {
+				// success message showing
+				successMessage(res.data['message']);
+				// set delay time function
+				setTimeout( function() {
+					window.location.href="/login";
+				}, 2000 );
+			}
+		}
+	}
+	
+	function errorMessage(error) {
+		document.getElementById('message').innerHTML = error;
+		document.getElementById('message').style.color = "red";
+	}
+	
+	function successMessage(success) {
+		document.getElementById('message').innerHTML = success;
+		document.getElementById('message').style.color = "green";
+	}
+</script>
+/*********************************************************************************
+
+
+

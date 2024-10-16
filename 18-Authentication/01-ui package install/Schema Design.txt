@@ -1,0 +1,62 @@
+
+# Role Migration : 
+-----------------------
+	$table->id();
+	$table->string('role_name');
+	$table->string('role_slug');
+	$table->text('role_note')->nullable()->comment('describes the role');
+	$table->boolean('is_deleteable')->default(true);
+	$table->timestamps();
+	$table->softDeletes();
+	
+# Module Migration : 
+--------------------------
+	$table->id();
+	$table->string('module_name');
+	$table->string('module_slug');
+	$table->timestamps();
+	$table->softDeletes();
+	
+# User Migration : 
+-----------------------
+	$table->id();
+	$table->foreignId('role_id')->constrained('roles'); // relationship with role table
+	$table->string('name');
+	$table->string('email')->unique();
+	$table->timestamp('email_verified_at')->nullable();
+	$table->string('password');
+	$table->rememberToken();
+	$table->boolean('is_active')->default(true);
+	$table->timestamps();
+	$table->softDeletes();
+	
+# Permission Migration : 
+-------------------------------
+	$table->id();
+	$table->foreignId('module_id')->constrained('modules')->onDelete('cascade');
+	$table->string('permission_name');
+	$table->string('permission_slug');
+	$table->timestamps();
+	$table->softDeletes();
+	
+# Permission & Role Pivot Migration : 
+-----------------------------------------------
+	$table->id();
+	$table->foreignId('permission_id')->constrained('permissions')->onDelete('cascade');
+	$table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+	$table->timestamps();
+	
+
+# Page Migration : 
+-----------------------
+	$table->id();
+	$table->string('page_title');
+	$table->string('page_slug');
+	$table->text('short_desc')->nullable()->comment('short description');
+	$table->longText('long_desc')->nullable()->comment('long description');
+	$table->text('meta_title')->nullable();
+	$table->text('meta_keywords')->nullable();
+	$table->text('meta_desc')->nullable();
+	$table->boolean('is_active')->default(false);
+	$table->timestamps();
+	$table->softDeletes();

@@ -1,0 +1,21 @@
+use Illuminate\Validation\Rules\Password;
+
+$request->validate([
+    'password' => [
+        'required',
+        'confirmed',
+        Password::min(8) // Minimum length of 8 characters
+            ->letters() // Must contain at least one letter
+            ->mixedCase() // Must contain both uppercase and lowercase letters
+            ->numbers() // Must contain at least one number
+            ->symbols() // Must contain at least one symbol
+            ->uncompromised(), // Check if the password has been compromised in data breaches
+    ],
+],[
+    'min' => 'The password must be at least :min characters.',
+    'letters' => 'The password must contain at least one letter.',
+    'mixedCase' => 'The password must contain both uppercase and lowercase letters.',
+    'numbers' => 'The password must contain at least one number.',
+    'symbols' => 'The password must contain at least one special character.',
+    'uncompromised' => 'The password has been found in a data breach. Please choose a different password.',
+]);

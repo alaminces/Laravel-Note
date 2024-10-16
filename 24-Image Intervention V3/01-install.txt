@@ -1,0 +1,5 @@
+composer require intervention/image
+
+# use in controller
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;

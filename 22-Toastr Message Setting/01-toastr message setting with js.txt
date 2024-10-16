@@ -1,0 +1,14 @@
+CSS Link :
+------------------
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
+JS Link :
+------------------
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+Javascript Code :
+---------------------------
+toastr["success"]("status updated success!");
+toastr["warning"]("status updated success!");
+toastr["info"]("status updated success!");
+toastr["error"]("Something went wrong!")

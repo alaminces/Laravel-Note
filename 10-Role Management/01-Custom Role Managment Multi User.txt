@@ -1,0 +1,99 @@
+# Create Table :
+==> users :
+====> name, email, password, role, status
+
+# Create Admin Dashboard, User Dashboard and also another.
+# create DashboardController 
+
+# Add AdminMiddleware to Route
+--------------------------------------------------------
+Route::group(['middleware'=>'admin'], function() {
+    
+   Route::controller(DashboardController::class)->group(function() {
+                
+        Route::get('/admin/dashboard','dashboard')->name('admin.dashboard');
+        
+   });
+});
+
+
+
+# Create AdminMiddleware
+--------------------------------------------------------
+==> Register middleware to kernel
+==> check condition 
+--------------------------------------------------------
+ if( !empty(Auth::check()) ) {
+
+    if ( Auth::user()->role == 'admin' ) {
+
+                return $next($request);
+            
+    }else {
+
+         Auth::logout();
+                
+         return redirect('/login');
+      
+    }
+      
+            
+       
+}else {
+          
+  Auth::logout();
+            
+  return redirect('/login');
+        
+}
+
+
+
+# Login Process
+---------------------------------------------
+public function login() {
+        if (!empty(Auth::check())) {
+            if ( Auth::user()->role == 'admin' ) {
+                return redirect()->route('admin.dashboard');
+            }elseif( Auth::user()->role == 'teacher' ) {
+                return redirect()->route('teacher.dashboard');
+            }elseif( Auth::user()->role == 'student' ) {
+                return redirect()->route('student.dashboard');
+            }elseif( Auth::user()->role == 'parent' ) {
+                return redirect()->route('parent.dashboard');
+            }
+        }
+        return view('auth.login');
+    }
+
+
+/// Login Authentication
+public function AuthLogin(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $remember = !empty($request->remember) ? true : false;
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials,$remember)) {
+
+            if ( Auth::user()->role == 'admin' ) {
+                return redirect()->route('admin.dashboard');
+            }elseif( Auth::user()->role == 'teacher' ) {
+                return redirect()->route('teacher.dashboard');
+            }elseif( Auth::user()->role == 'student' ) {
+                return redirect()->route('student.dashboard');
+            }elseif( Auth::user()->role == 'parent' ) {
+                return redirect()->route('parent.dashboard');
+            }
+
+        }else {
+            return redirect()->back()->with('error','Please enter correct email or password');
+        }
+        
+    }

@@ -1,0 +1,35 @@
+ public function store(Request $request) {
+
+        # Image Validation Rulse
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        
+        # hasFile Method
+        if ( $request->hasFile('image') ) {
+            # File Info
+            $file = $request->file('image');
+            # File Type
+            $type = $file->getType();
+            $type = filetype($file);
+            # File Size in KB
+            $size = $file->getSize();
+            $size = filesize($file);
+            # File Name 
+            $name = $file->getClientOriginalName();
+            # File Extension
+            $extension = $file->getClientOriginalExtension();
+            
+            # Generate File Name 
+            $name_generate = time().".". $file->getClientOriginalExtension();
+            $new_name = date('YmdHi')."-".$file->getClientOriginalName();
+            $name_gen = hexdec(uniqid()).'.'.$request->file('brand_image')->getClientOriginalExtension();
+
+            # File Upload in Public Directory
+            $file->move(public_path('upload/'),$name_generate);
+
+            return redirect()->back()->with('success', 'File uploaded successfully.');
+        }
+
+
+    }

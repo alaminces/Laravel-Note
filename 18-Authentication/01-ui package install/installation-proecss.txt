@@ -1,0 +1,6 @@
+
+
+1. Create Project 
+2. laravel ui install
+3. laravel ui authentication package install 
+

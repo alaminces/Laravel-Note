@@ -1,0 +1,51 @@
+
+# Create a new directory named `errors` in view directory
+# Create error page like 404,405,500 etc 
+
+// internal server error
+Route::get('/error-500', function() {
+    abort(500);
+});
+
+// method not allowed
+Route::get('/error-405', function() {
+    abort(405);
+});
+
+// page not found
+Route::get('/error-404', function() {
+    abort(404);
+});
+
+// payload too large
+Route::get('/error-413', function() {
+    abort(413);
+});
+
+// unauthorized error
+Route::get('/error-401', function() {
+    abort( 401);
+});
+
+
+
+example : 
+views -> errors -> 404.blade.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

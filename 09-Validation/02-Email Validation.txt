@@ -1,0 +1,7 @@
+## Email Validation with real email address : 
+
+$request->validate([
+     "email"=> "email:filter", // first works
+     "email"=> "email:rfc,dns", // slow works
+     "email"=> "email:filter,rfc,dns", // slow works
+]);

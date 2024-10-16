@@ -1,0 +1,23 @@
+Step 00 : Email config in .env
+
+Step 01 : Create forgot password page route
+
+Step 02 : Create email verify route
+  i) Create remember token = Str::random(30)
+  ii) Save to database
+
+Step 03 : Create Forgot password mail
+  i) php artisan make:mail ForgotPasswordMail
+  ii) Mail::to( xyz@gmail.com )->send( new ForgotPasswordMail( user data ) );
+  iii) Config ForgotPasswordMail Page (data, subject, view)
+
+Step 04 : Send forget password html template to email with remember token
+  i) create route for reset link with remember token
+ 
+Step 05 : create route for change password with remember token
+  i) new password save
+  ii) remember token save 
+  iiI) return redirect to login page
+
+
+	
