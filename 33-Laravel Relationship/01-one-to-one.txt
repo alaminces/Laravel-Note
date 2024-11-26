@@ -1,0 +1,87 @@
+== One To One Relationship ==
+# relationship one to one (user with profile table)
+$table->foreignId('user_id')->constrained()->onDelete('cascade');
+$table->string('phone');
+
+# view file create
+php artisan make:view phone
+
+# create user data with tinker and factory
+php artisan tinker
+User::factory()->create();
+
+
+# relationship method
+    public function profile() {
+        return $this->hasOne(Profile::class);
+    }
+
+# relation data access in view file
+{{ $user->profile?->phone }}   // profile er data jodi na thake tahle null return korba
+
+// dd($user->profile);  // jodi profile data na thake tahle null return korba
+
+@if( $user->profile )
+	{{ $user->profile->phone }}
+@endif
+
+
+===================================
+===================================
+# Return profile data under the user controller ::::
+$user = User::find(1);
+return $user->profile;
+
+# ভালো পদ্ধতি ডাটা  Create করার ::::
+$user->profile()->create([
+	'phone' => 01307355
+]);
+
+# Insert data without fillable property by force create method ::::
+Profile::forceCreate([
+	'user_id' => $user->id,
+	'phone'=>'12233399'
+]);
+
+
+# Udpate Data ::::
+$user->profile()->update([
+	'phone' => 123456789,
+]);
+
+# Delete :::: 
+$user->profile()->delete();
+
+# Return Profile data in wrong process ::::
+return $user->profile()->latest()->first();
+
+# Return Profile data in right process ::::
+return $user->profile()->first();
+>>> Note : add latest() method in User model
+public function profile() {
+	return $this->hasOne(Profile::class)->latest();
+}
+
+
+# Login an user ::::
+>>> Note : config in AppServiceProvider.php
+\Auth::loginUsingId(1);  // add this code in boot() method
+
+# After login and display user data ::::
+return auth()->user();
+return $request->user();
+
+# Route Binding to edit profile ::::
+<a href="{{ route('profile.edit',$user->profile) }}">Edit</a>
+<a href="{{ route('profile.edit',$user->profile->id) }}">Edit</a>
+
+# Model Binding ::::
+Route::get('/profile/{profile}/edit',[ProfileController::class,'edit'])->name('profile.edit');
+public function edit(Profile $profile) {
+	return $profile;
+}
+>>> Note : route url must have `{profile}` and method parameter will be 'Profile $profile'
+
+
+
+

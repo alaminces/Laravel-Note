@@ -37,6 +37,8 @@ w3 coders :  https://www.youtube.com/@W3Coders/playlists
 https://www.youtube.com/playlist?list=PLOUudhWYmRUPV7JTSeK9g__8j1YSGSAIn
 ==================================
 
+laravel volume -2 
+https://github.com/rafi021/spiderman-project
 
 
 

@@ -1,0 +1,120 @@
++========================================+
+# Create Multi Language 
++========================================+
+
+# Create Language Folders:
+resources/lang/en
+resources/lang/bn
+
+
+# Create Translation Files: (resources/lang/en/messages.php)
+return [
+    'welcome' => 'Welcome',
+    'title' => 'Title',
+    'description' => 'Description',
+];
+
+# Create Translation Files: (resources/lang/bn/messages.php)
+return [
+    'welcome' => 'স্বাগতম',
+    'title' => 'শিরোনাম',
+    'description' => 'বিবরণ',
+];
+
+
+# Set Up Middleware for Language Switching
+php artisan make:middleware LanguageSwitcher
+
+use Illuminate\Support\Facades\App;
+class LanguageSwitcher
+{
+    public function handle($request, Closure $next)
+    {
+        $locale = $request->get('lang', 'en'); // Default to English
+        App::setLocale($locale);
+
+        return $next($request);
+    }
+}
+
+# Register the middleware in app/Http/Kernel.php:
+protected $middlewareGroups = [
+    'web' => [
+        \App\Http\Middleware\LanguageSwitcher::class,
+    ],
+];
+
+# Database Model with Migration
+php artisan make:model Post -m
+
+Schema::create('posts', function (Blueprint $table) {
+    $table->id();
+    $table->string('title_en');
+    $table->string('title_bn');
+    $table->text('description_en');
+    $table->text('description_bn');
+    $table->timestamps();
+});
+
+
+# php artisan migrate
+
+
+# Fetch Data Dynamically in Controller
+php artisan make:controller PostController
+
+public function index() {
+    $posts = Post::all();
+    return view('posts.index', compact('posts'));
+}
+
+
+# Blade File for Multilingual Display :
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ __('messages.welcome') }}</title>
+</head>
+<body>
+    <h1>{{ __('messages.welcome') }}</h1>
+
+    <div>
+        <a href="{{ url()->current() }}?lang=en">English</a>
+        <a href="{{ url()->current() }}?lang=bn">বাংলা</a>
+    </div>
+
+    <div>
+        @foreach ($posts as $post)
+            <h2>{{ app()->getLocale() === 'bn' ? $post->title_bn : $post->title_en }}</h2>
+            <p>{{ app()->getLocale() === 'bn' ? $post->description_bn : $post->description_en }}</p>
+        @endforeach
+    </div>
+</body>
+</html>
+
+# Add Routes
+use App\Http\Controllers\PostController;
+
+Route::get('/', [PostController::class, 'index']);
+
+
+# Seed the Database
+php artisan make:seeder PostSeeder
+use App\Models\Post;
+
+public function run()
+{
+    Post::create([
+        'title_en' => 'First Post',
+        'title_bn' => 'প্রথম পোস্ট',
+        'description_en' => 'This is the first post description.',
+        'description_bn' => 'এটি প্রথম পোস্টের বিবরণ।',
+    ]);
+}
+
+# seeding data and run project :
+php artisan db:seed --class=PostSeeder
+php artisan serve
+

@@ -1,0 +1,88 @@
+=========================================
+# Install Package
+composer require stichoza/google-translate-php
+
+# Config package in config -> app.php 
+'aliases' => Facade::defaultAliases()->merge([
+	'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,  // this line is added
+])->toArray(),
+=========================================
+
+
+=========================================
+# Create Middleware
+php artisan make:middleware LanguageManager
+
+# Setup in LanguageManager.php 
+use Illuminate\Support\Facades\App;
+
+public function handle(Request $request, Closure $next): Response
+{
+	if (session()->has('locale')) {
+		App::setLocale(session()->get('locale'));
+	}  // added this code 
+	return $next($request);
+}
+
+# Register middleware in kernel.php
+'web' => [
+	\App\Http\Middleware\LanguageManager::class,
+],
+=========================================
+
+====================Start=====================
+# Creeate a new Controller
+php artisan make:controller LanguageController
+
+# Create routes :
+Route::get('/home', [LanguageController::class,'index'])->name('home');
+Route::get('/change-lang', [LanguageController::class,'change_language'])->name('change.lang');
+====================End=====================
+
+====================Start=====================
+# Setup change_language() method in controller :
+use Illuminate\Support\Facades\App;
+OR 
+use App;
+
+public function change_language(Request $request) {
+	App::setLocale($request->lang);
+	session()->put('locale', $request->lang);
+	return redirect()->back();
+}
+====================End=====================
+
+====================Start=====================
+# Create Blade dir & file ( home dir & index file )
+
+
+# Create select language option in index.blade.php  
+<select name="language" id="language">
+	<option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+	<option value="bn" {{ session()->get('locale') == 'bn' ? 'selected' : '' }}>Bangla</option>
+	<option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+</select>
+====================End=====================
+
+====================Start=====================
+# Change language option with jquery
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var url = "{{ route('change.lang') }}";
+    $("#language").change(function(){
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+</script>
+====================End=====================
+
+====================End=====================
+# Display Translation Language data :
+
+$title = "This is heading Title";
+$content = "This is content of website.";
+<h2> {{ GoogleTranslate::trans($title, app()->getLocale()) }} </h2>
+<p> {{ GoogleTranslate::trans($content, app()->getLocale()) }} </p>
+
+{{ GoogleTranslate::trans("your data", app()->getLocale()) }}
+====================End=====================

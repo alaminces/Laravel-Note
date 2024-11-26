@@ -1,0 +1,28 @@
+// Create Route
+Route::get('zip-download', [DownloadController::class,'zipDownload']);
+
+// download method
+public function zipDownload() {
+        $zip = new ZipArchive();
+        $fileName = time().".zip";
+
+        if( $zip->open(public_path($fileName), ZipArchive::CREATE) === true ) {
+           $files = File::files(public_path('images')) ;
+
+           foreach($files as $key => $value) {
+            $relativeNameFile = basename($value);
+            $zip->addFile($value, $relativeNameFile);
+           }
+           $zip->close();
+        }
+        
+        
+        return response()->download(public_path($fileName));
+    }
+
+# Import below Trait;
+use File;
+use Response;
+use ZipArchive;
+
+Note : create a route and controller. make sure file directory in public folder

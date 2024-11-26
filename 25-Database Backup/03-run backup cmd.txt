@@ -1,0 +1,6 @@
+php artisan backup:run    // take backup db & files
+php artisan backup:run --only-db    // backup only db
+php artisan backup:run --only-files   // backup only files
+
+নোট : উপরের রান কমান্ড  লোকালে শুধুমাত্র টারমিনালের সাহায্যে কাজ করবে। অন্যথায়  কোনো ফাংশনের সাহায্যে কাজ করবে না। 
+আবার সার্ভারের ক্ষেত্রে কাজ করবে।

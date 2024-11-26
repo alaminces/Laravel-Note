@@ -1,0 +1,48 @@
+create project
+# install laravel browner12 helper
+https://github.com/browner12/helpers
+
+# install cmd :
+composer require browner12/helpers
+
+# Setup in config/app.php
+'providers' => [
+    browner12\helpers\HelperServiceProvider::class,
+];
+
+# Publish vendor :
+php artisan vendor:publish --provider="browner12\helpers\HelperServiceProvider"
+
+# create helper function & setup
+php artisan make:helper SettingHelper
+
+# Next ....
+php artisan make:model Setting -m
+php artisan make:controller SettingController
+php artisan make:request GeneralSettingUpdateRequest
+....
+
+#Create Migration named `settings` :
+ Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('value')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+});
+
+
+# Web Routes :
+Route::group(['as'=>'settings.','prefix'=>'settings'], function() {
+    Route::get('/create',[SettingController::class,'index'])->name('index');
+    Route::post('/general',[SettingController::class,'general_setting'])->name('general.update');
+    Route::post('/appearance',[SettingController::class,'appearance_setting'])->name('appearance.update');
+    Route::post('/mail',[SettingController::class,'mail_setting'])->name('mail.update');
+});
+
+
+
+
+
+
+

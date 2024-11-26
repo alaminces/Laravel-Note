@@ -1,0 +1,28 @@
+# Setup : সেটাপ করতে হবে  config ডিরেক্টরির ভিতরে database.php ফাইলের  connections থেকে  mysql এর ভিতরে  নিচের  dump এর ডাটা সেট করতে হবে।
+
+# config/database.php
+
+// For local (Only the path where xampp installed)
+---------------------------------------------------------------
+'connections' => [
+     'mysql' => [
+        'dump' => [
+                'dump_binary_path' => 'F:\xampp\mysql\bin',
+                'use_single_transaction',
+                'timeout' => 60*5 // 5 min timeout
+            ],
+    ]
+],
+
+
+//For Server : (such as cpanel and others)
+---------------------------------------------------------------
+'connections' => [
+     'mysql' => [
+        'dump' => [
+                'dump_binary_path' => 'yourdomain/project-name/public',
+                'use_single_transaction',
+                'timeout' => 60*5 // 5 min timeout
+            ],
+    ]
+],

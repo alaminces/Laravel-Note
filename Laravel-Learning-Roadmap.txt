@@ -1,0 +1,204 @@
+>>> Basic Laravel (Beginner) <<<
+================================
+# Introduction to Laravel :
+  > Installing Laravel via Composer
+  > Basic Laravel Directory Structure
+  > Configuration Files and Environment Setup
+  > Understanding .env file
+
+# Routing :
+  > Defining Routes (GET, POST, PUT, DELETE)
+  > Route Parameters (required and optional)
+  > Named Routes
+
+# Controllers :
+  > Creating Controllers
+  > Basic Controller Methods
+  > Route-Controller Binding
+  > Dependency Injection in Controllers
+
+# Views & Blade Templates :
+  > Blade Syntax (Directives, Echoing Data)
+  > Layouts and Sections
+  > Blade Components and Include
+  > Loops, Conditionals, and Forelse
+
+# Models and Database :
+  > Introduction to Eloquent ORM
+  > Creating and Running Migrations
+  > Model-Database Relationships (1-to-1, 1-to-many, many-to-many)
+  > Query Builder vs Eloquent
+  > Basic CRUD Operations (Create, Read, Update, Delete)
+
+# Authentication: 
+  > Laravel's Built-In Authentication (Login/Registration)
+  > Protecting Routes with Authentication
+  > Hashing and Encrypting Passwords
+
+# Forms & Validation :
+  > Creating Forms in Blade
+  > Handling Form Submission
+  > Laravel Form Requests
+  > Built-in Validation Rules
+
+# Session and Flash Data :
+  > Storing and Retrieving Session Data
+  > Flash Messages for One-Time Data
+
+# Artisan Commands :
+  > Running Artisan Commands (migrate, make:model, etc.)
+  > Custom Artisan Commands
+
+# Error Handling and Debugging :
+  > Handling Errors with try-catch
+  > Logging Errors (Log Facade)
+  > Debugging with dd() and dump()
+
+
+>>> Intermediate Laravel <<<
+============================
+# Advanced Routing :
+  > Route Model Binding
+  > Custom Route Filters
+  > Subdomain Routing
+  > Route Caching
+
+# Middleware :
+  > Creating and Using Middleware
+  > Global vs. Route-Specific Middleware
+  > Middleware Parameters
+
+# Advanced Controllers :
+  > Resource Controllers and CRUD
+  > Constructor Injection in Controllers
+  > Single Action Controllers
+
+# Requests and Input :
+  > Request Lifecycle and HTTP Requests
+  > Input Validation
+  > Custom Validation Rules
+
+# Eloquent Relationships :
+  > Polymorphic Relationships
+  > Has Many Through, Has One Through
+  > Many-to-Many Relationships with Pivot Tables
+  > Accessors and Mutators
+
+# Database Operations :
+  > Database Seeder and Factory
+  > Soft Deletes
+  > Query Scopes (Global and Local)
+  > Eloquent Collections and Higher-Order Messages
+
+# Caching :
+  > Using Cache (File, Redis, Database)
+  > Caching Views and Routes
+  > Cache Tags and Cache Binning
+
+# Mailing :
+  > Sending Emails Using Mailable Classes
+  > Queued Mail Sending
+  > Mail Templates with Blade
+
+# File Storage :
+  > Local, S3, and Cloud Storage
+  > File Uploads in Laravel
+  > File Validation and Storage Configuration
+
+# Testing :
+  > PHPUnit and Laravel Testing
+  > Writing Unit and Feature Tests
+  > Database Migrations for Testing
+  > Using Mocking and Fakes
+
+# Queues and Jobs :
+  > Introduction to Laravel Queues
+  > Setting Up a Queue (Database, Redis)
+  > Dispatching and Processing Jobs
+  > Job Events and Retry Mechanism
+
+
+>>> Advanced Laravel <<<
+========================
+# Service Providers and Dependency Injection :
+  > Writing Custom Service Providers
+  > Binding Interfaces to Implementations
+  > Contextual Binding
+  > Singleton and Binding Resolution
+
+# Event Handling :
+  > Event and Listener System
+  > Broadcasting Events with Laravel Echo
+  > Queued Events
+  > Event Subscribers
+
+# Policies and Gates :
+  > Introduction to Authorization
+  > Defining Gates
+  > Using Policies
+  > Model Policies and CRUD Operations
+
+# Task Scheduling :
+  > Introduction to Task Scheduling (cron jobs)
+  > Defining Scheduled Tasks
+  > Task Scheduling with Artisan Commands
+
+# Laravel Passport (API Authentication) :
+  > Introduction to Laravel Passport
+  > OAuth2 Authentication with Passport
+  > Personal Access Tokens
+  > Protecting API Routes
+
+# Laravel Sanctum (Simple API Authentication) :
+  > Introduction to Laravel Sanctum
+  > API Authentication with Sanctum
+  > Single Page Applications (SPA) Authentication
+
+# Advanced Eloquent :
+  > Eloquent API Resource Responses
+  > Query Optimization and N+1 Query Problem
+  > Eloquent Transactions and Locking
+
+# Advanced Blade & Vue.js/React Integration :
+  > Passing Data from Controller to Vue.js/React
+  > Blade with Vue.js/React Components
+  > Full-Stack Laravel Applications
+
+# Package Development :
+  > Building a Laravel Package
+  > Registering Routes and Migrations
+  > Service Providers in Packages
+
+# RESTful API Development :
+  > Designing RESTful APIs
+  > API Resource Responses
+  > Pagination and Filtering
+  > Versioning APIs
+
+# Laravel Horizon (Queue Management) :
+  > Introduction to Laravel Horizon
+  > Monitoring Queue Jobs
+  > Customizing Horizon Dashboard
+
+# WebSockets :
+  > Real-time WebSockets with Laravel
+  > Broadcasting Events to WebSockets
+  > Pusher Integration
+
+# Debugging & Performance Optimization :
+  > Profiling Queries with Debugbar
+  > Optimizing Database Queries
+  > Profiling and Performance Testing
+  > Debugging with Xdebug
+
+# Security Best Practices :
+  > Protecting Against SQL Injection, XSS, CSRF
+  > Secure File Uploads
+  > Password Encryption & Hashing
+  > Two-Factor Authentication
+
+# Deployment & DevOps :
+  > Setting up Laravel on Production Server
+  > Deployment with Forge and Envoyer
+  > Continuous Integration (CI) & Continuous Deployment (CD)
+  > Dockerizing Laravel Applications
